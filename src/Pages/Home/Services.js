@@ -14,13 +14,13 @@ const Services = () => {
             img: fluoride
         },
         {
-            _id: 1,
+            _id: 2,
             name: 'Cavity Filling',
             description: 'Lorem Ipsum is simply dummy printing and typesetting indust Ipsum has been the',
             img: cavity
         },
         {
-            _id: 1,
+            _id: 3,
             name: 'Teeth Whitening',
             description: 'Lorem Ipsum is simply dummy printing and typesetting indust Ipsum has been the',
             img: whitening
@@ -28,7 +28,7 @@ const Services = () => {
     ]
     return (
 
-        <div className='mt-28'>
+        <div className='mt-28 px-7'>
             <div className=' text-center'>
                 <h2 className='text-xl text-primary uppercase font-bold'>our services</h2>
                 <h2 className='text-4xl uppercase mt-2'>Services We Provide</h2>
@@ -41,15 +41,17 @@ const Services = () => {
                     ></Service>)
                 }
             </div>
-            
 
-            <div class="hero min-h-screen bg-base-100 mt-32">
-                <div class="hero-content flex-col lg:flex-row">
-                    <img className='w-1/2' src={treatment} />
+
+            <div className="hero min-h-screen bg-base-100 my-32 px-7">
+                <div className="hero-content justify-between flex-col lg:flex-row ">
                     <div className='w-1/2'>
-                        <h1 class="text-5xl font-bold">Exceptional Dental Care, on Your Terms</h1>
-                        <p class="py-6">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsumis that it has a more-or-less normal distribution of letters,as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page.</p>
-                        <button class="btn btn-primary text-white bg-gradient-to-r from-secondary to-primary">Get Started</button>
+                        <img src={treatment} />
+                    </div>
+                    <div className='w-1/2'>
+                        <h1 className="text-5xl font-bold">Exceptional Dental Care, on Your Terms</h1>
+                        <p className="py-6">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsumis that it has a more-or-less normal distribution of letters,as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page.</p>
+                        <button className="btn btn-primary text-white bg-gradient-to-r from-secondary to-primary">Get Started</button>
                     </div>
                 </div>
             </div>

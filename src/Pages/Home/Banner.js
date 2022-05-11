@@ -4,8 +4,12 @@ import bg from "../../assets/images/bg.png"
 
 const Banner = () => {
     return (
-        <div className="hero min-h-screen px-12" style={{backgroundImage:`url(${bg})`}} >
-            <div className="hero-content flex-col lg:flex-row-reverse">
+        <div className="hero min-h-screen px-12" 
+        style={{
+            backgroundImage:`url(${bg})`,
+            backgroundSize: 'cover'
+            }} >
+            <div className="hero-content flex-col lg:flex-row-reverse px-12">
                 <img src={chair} className="max-w-md rounded-lg shadow-2xl" />
                 <div>
                     <h1 className="text-5xl font-bold">Your New Smile Starts Here</h1>
