@@ -1,7 +1,7 @@
 import React from 'react';
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Navbar/Loading';
 
@@ -9,22 +9,26 @@ const SignUp = () => {
 
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
     const [
         createUserWithEmailAndPassword,
         user,
         loading,
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
+    const navigate = useNavigate();
 
     let signError;
 
-    if (loading || gLoading) {
+    if (loading || gLoading || updating) {
 
         return <Loading></Loading>
     }
 
-    if (error || gError) {
-        signError = <p className='text-red-600 pb-3'><small>{error?.message}|| {gError?.message}</small></p>
+    if (error || gError || updateError) {
+        signError = <p
+            className='text-red-600 pb-3'><small>{error?.message}|| {gError?.message}|| {updateError?.message}
+            </small></p>
 
     }
 
@@ -32,10 +36,14 @@ const SignUp = () => {
         console.log(user, gUser)
     }
 
-    const onSubmit = data => {
+    const onSubmit = async data => {
         console.log(data);
-        createUserWithEmailAndPassword(data.email, data.password)
+        await createUserWithEmailAndPassword(data.email, data.password)
+        await updateProfile({ displayName: data.name });
+        console.log('update done');
+        navigate('/appointment')
     }
+
     return (
         <div className="flex justify-center h-screen items-center">
             <div className="card w-96 bg-base-100 shadow-xl">
