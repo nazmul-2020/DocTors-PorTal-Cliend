@@ -4,6 +4,7 @@ import Appointment from "./Pages/Appointment/Appointment";
 import Contact from "./Pages/Contact/Contact";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
+import SignUp from "./Pages/Login/SignUp";
 import Reviews from "./Pages/Reviews/Reviews";
 import Navbar from "./Pages/Shared/Navbar/Navbar";
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/reviews" element={<Reviews></Reviews>}></Route>
         <Route path="/contact" element={<Contact></Contact>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
+        <Route path="/signUp" element={<SignUp></SignUp>}></Route>
       </Routes>
     </div>
   );
