@@ -17,7 +17,7 @@ const Navbar = () => {
         <li><NavLink to="/appointment">Appointment</NavLink></li>
         <li><NavLink to="/reviews">Reviews</NavLink></li>
         <li><NavLink to="/contact">Contact Us</NavLink></li>
-        <li>{user ? <button className="btn btn-ghost" onClick={logout}>Sign Out</button> : <NavLink to="/login">Login</NavLink>}</li>
+        <li>{user ? <button className="btn btn-ghost " onClick={logout}>Sign Out</button> : <NavLink to="/login">Login</NavLink>}</li>
     </>
     return (
         <div className="navbar bg-base-100 px-12">
