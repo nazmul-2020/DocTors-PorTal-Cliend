@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 const BookingModal = ({ date, treatment, setTreatment }) => {
     const { _id, name, slots } = treatment;
     const [user, loading, error] = useAuthState(auth);
-    const formatteDate = format(date, 'PP');
+    const formattedDate = format(date, 'PP');
 
     const handleBooking = event => {
         event.preventDefault();
@@ -16,7 +16,7 @@ const BookingModal = ({ date, treatment, setTreatment }) => {
         const booking = {
             treatmentId: _id,
             treatment: name,
-            date: formatteDate,
+            date: formattedDate,
             slot,
             patient: user.email,
             patientName: user.displayName,
@@ -35,7 +35,7 @@ const BookingModal = ({ date, treatment, setTreatment }) => {
             .then((data) => {
                 console.log(data)
                 if(data.success){
-                    toast(`Appointment is set, ${formatteDate} at ${slot}`)
+                    toast(`Appointment is set, ${formattedDate} at ${slot}`)
                 }
                 else{
                     toast.error(`Appointment is set, ${data.booking?.date} at ${data.booking?.date}`)
