@@ -16,10 +16,11 @@ const SignUp = () => {
         loading,
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
-    
+
     const [token] = useToken(user || gUser);
 
     const navigate = useNavigate();
+    
     let signError;
 
     if (loading || gLoading || updating) {
@@ -35,8 +36,7 @@ const SignUp = () => {
     }
 
     if (token) {
-
-        // navigate('/appointment')
+        navigate('/appointment')
     }
 
     const onSubmit = async data => {
