@@ -18,7 +18,7 @@ const MyAppointment = () => {
                     'authorization': `Bearer ${localStorage.getItem('accessToken')}`
                 }
             })
-
+            
                 .then(res => {
                     console.log('res', res);
                     if (res.status === 401 || res.status === 403) {
