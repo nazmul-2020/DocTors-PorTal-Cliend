@@ -17,11 +17,11 @@ const Users = () => {
     return (
         <div>
             <h1>all user {users.length}</h1>
-            <div class="overflow-x-auto">
+            {/* <div class="overflow-x-auto">
                 <table class="table w-full">
                     <thead>
                         <tr>
-                            <th></th>
+                            <th>No.</th>
                             <th>Name</th>
                             <th>Job</th>
                             <th>Favorite Color</th>
@@ -33,6 +33,30 @@ const Users = () => {
                                 key={user._id}
                                 user={user}
                                 refetch={refetch}
+                            ></UsersRow>)
+                        }
+                    </tbody>
+                </table>
+            </div> */}
+
+            <div class="overflow-x-auto">
+                <table class="table w-full">
+                    {/* <!-- head --> */}
+                    <thead>
+                        <tr className=''>
+                            <th>No.</th>
+                            <th>Name</th>
+                            <th>Job</th>
+                            <th>Favorite Color</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            users.map((user,index) => <UsersRow
+                                key={user._id}
+                                user={user}
+                                refetch={refetch}
+                                index={index}
                             ></UsersRow>)
                         }
                     </tbody>
