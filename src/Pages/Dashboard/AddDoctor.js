@@ -1,3 +1,4 @@
+import { cs } from 'date-fns/locale';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
@@ -7,16 +8,44 @@ const AddDoctor = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     const { isLoading, data: services } = useQuery('services', () => fetch('http://localhost:5000/service').then(res =>
-        res.json()
-    )
-    )
+        res.json()))
+
+    const imageStorageKey = '2a7fafd69178ccc56f3fa1b67f01b8c5'
+    /**
+* 3 ways to store images
+* 1. Third party storage //Free open public storage is ok for Practice project 
+* 2. Your own storage in your own server (file system)
+* 3. Database: Mongodb 
+* 
+* YUP: to validate file: Search: Yup file validation for react hook form
+*/
+
 
     if (isLoading) {
         return <Loading />
     }
 
     const onSubmit = async data => {
-        console.log('data', data);
+        const image = data.image[0];
+        const formData = new FormData();
+        formData.append('image', image);
+        const url=`https://api.imgbb.com/1/upload?&key=${imageStorageKey}`
+        fetch(url,{
+            method:'POst',
+            body:formData
+        })
+        .then(res=>res.json())
+        .then(result=>{
+            if(result.success){
+                const img=result.data.url;
+                const doctor={
+                    name:data.name,
+                    email:data.email,
+                    img:img
+                }   
+                // send to database
+            }
+        })
     }
     return (
         <div>
