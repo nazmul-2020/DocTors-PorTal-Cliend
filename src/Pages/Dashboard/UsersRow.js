@@ -18,8 +18,8 @@ const UsersRow = ({ user, refetch, index }) => {
             })
             .then(data => {
                 if (data.modifiedCount > 0) {
-                    refetch();
                     toast('Successfully made an admin');
+                    refetch();
                     console.log(data);
                 }
             })
