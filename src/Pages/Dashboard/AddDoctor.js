@@ -2,10 +2,11 @@ import { cs } from 'date-fns/locale';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
+import { toast } from 'react-toastify';
 import Loading from '../Shared/Navbar/Loading';
 
 const AddDoctor = () => {
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
     const { isLoading, data: services } = useQuery('services', () => fetch('http://localhost:5000/service').then(res =>
         res.json()))
@@ -29,23 +30,42 @@ const AddDoctor = () => {
         const image = data.image[0];
         const formData = new FormData();
         formData.append('image', image);
-        const url=`https://api.imgbb.com/1/upload?&key=${imageStorageKey}`
-        fetch(url,{
-            method:'POst',
-            body:formData
+        const url = `https://api.imgbb.com/1/upload?&key=${imageStorageKey}`
+        fetch(url, {
+            method: 'POst',
+            body: formData
         })
-        .then(res=>res.json())
-        .then(result=>{
-            if(result.success){
-                const img=result.data.url;
-                const doctor={
-                    name:data.name,
-                    email:data.email,
-                    img:img
-                }   
-                // send to database
-            }
-        })
+            .then(res => res.json())
+            .then(result => {
+                if (result.success) {
+                    const img = result.data.url;
+                    const doctor = {
+                        name: data.name,
+                        email: data.email,
+                        img: img
+                    }
+                    // send to database
+                    fetch('http://localhost:5000/doctor', {
+                        method: 'POST',
+                        headers: {
+                            'Content-type': 'application/json',
+                            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                        },
+                        body: JSON.stringify(doctor)
+                    })
+                        .then(res => res.json())
+                        .then(inserted => {
+                            console.log('doctor', inserted);
+                            if (inserted.insertedId) {
+                                toast.success('Doctor add successfully');
+                                reset();
+                            }
+                            else {
+                                toast.error('Failed to add the doctor')
+                            }
+                        })
+                }
+            })
     }
     return (
         <div>
