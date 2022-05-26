@@ -63,7 +63,7 @@ const MyAppointment = () => {
                     <tbody>
                         {
                             appointment.map((a, index) =>
-                                <tr className=''>
+                                <tr>
                                     <th>{index + 1}</th>
                                     <td>{a.patientName}</td>
                                     <td>{a.date}</td>
